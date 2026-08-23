@@ -101,12 +101,6 @@ function initSortable() {
 			handle: '.handler', // handler 영역을 잡았을 때만 드래그하도록 제한합니다.
 			direction: 'vertical', // 목록이 세로 방향으로 정렬되도록 합니다.
 			filter: '.disabled', // disabled 클래스를 가진 항목은 드래그할 수 없게 합니다.
-			onEnd: (event) => {
-				// 드래그가 끝난 뒤 실행됩니다.
-				// 서버 저장이나 현재 순서 갱신이 필요하면 이곳에 작성합니다.
-				updateMoveButtons(); // 드래그 후 버튼 상태를 갱신합니다.
-				updateSortableStatus(event.item, event.newIndex);
-			},
 			onUpdate: () => {
 				// 항목의 순서가 실제로 바뀌었을 때 실행됩니다.
 				console.log('Items updated');
