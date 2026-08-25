@@ -6,23 +6,35 @@ function IframeHeight() {
             function iframeMutation(entries) {
                 entries.forEach(function(entry) {
                     var offSetH = entry.target.clientHeight;
-                    e.style.height = `${offsetH}px`;
+                    // 오류 예시: 변수명 offSetH와 offsetH의 대소문자가 달라 offsetH를 찾을 수 없습니다.
+                    // e.style.height = `${offsetH}px`;
+                    e.style.height = `${offSetH}px`;
+                    // iframe의 크기 변화를 한 번 처리했으므로 더 이상 감시하지 않습니다.
+                    // 계속 감시하면 크기 변경 -> 콜백 실행 -> 크기 변경이 반복될 수 있습니다.
                     resizeObserver.disconnect();
                 })
             }
             var resizeObserver = new ResizeObserver(iframeMutation);
+            // observe()의 첫 번째 인수는 크기를 감시할 실제 DOM 요소입니다.
+            // 여기서는 iframe 요소 e의 너비나 높이가 바뀔 때 iframeMutation을 실행합니다.
             resizeObserver.observe(e);
         }
         function resizeH() {
             setTimeout(function() {
                 var offsetH = e.contentWindow.document.body.clientHeight;
-                e.style.hieght = offsetH + 'px';
+                // 오류 예시: CSS 속성명은 hieght가 아니라 height입니다.
+                // e.style.hieght = offsetH + 'px';
+                e.style.height = offsetH + 'px';
                 clientObserver();
             }, 300);
         }
         var events = ['load', 'resize'];
-        for(var i = 0; i < evnets.length; i++) {
-            window.addEventListener(events[i], resize);
+        // 오류 예시: evnets와 resize는 선언된 이름과 달라 실행할 수 없습니다.
+        // for(var i = 0; i < evnets.length; i++) {
+        //     window.addEventListener(events[i], resize);
+        // }
+        for(var i = 0; i < events.length; i++) {
+            window.addEventListener(events[i], resizeH);
         }
     })
 }
@@ -52,6 +64,8 @@ function anchorNav() {
         }, 300);
     });
     sections.forEach(function(section) {
+        // section마다 observer를 연결합니다.
+        // observe()는 한 observer로 여러 요소를 감시할 수 있으므로 section마다 새로 만들 필요가 없습니다.
         observer.observe(section);
     })
 
@@ -126,7 +140,22 @@ function anchorNav() {
                     
                 })
             })
-            reloadObserver.observe(document.querySelector('.contents', configß))
+            // MutationObserver.observe()는 다음 두 인수를 받습니다.
+            // 1) 감시할 실제 DOM 요소
+            // 2) 어떤 변경을 감시할지 정하는 옵션 객체
+            //
+            // 현재 코드는 config를 querySelector()에 전달하고 있습니다.
+            // querySelector()는 선택자 하나만 받으므로 config는 무시되고,
+            // observe()에는 옵션이 전달되지 않아 실행 시 오류가 발생합니다.
+            // 올바른 문법은 다음과 같습니다.
+            // reloadObserver.observe(document.querySelector('.contents'), config);
+            // 오류 예시: config가 querySelector()에 전달되어 observe()의 두 번째 인수가 빠집니다.
+            // reloadObserver.observe(document.querySelector('.contents', config));
+            const contents = document.querySelector('.contents');
+            // 감시 대상이 없는 페이지에서는 observe()를 실행하지 않아 오류를 예방합니다.
+            if(contents) {
+                reloadObserver.observe(contents, config);
+            }
         }
     }
     function increaseSequence() {
