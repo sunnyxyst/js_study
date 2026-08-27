@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="account-book">
+        <div class="account-plate">
+            <div class="account card-box" onclick="console.log('계좌상세보기')">
+                <header class="card-header">
+                    <div class="states">
+                        <button type="button" class="a" onclick="console.log('계좌연결끊김')">계좌연결이 끊겨요</button>
+                    </div>
+                </header>
+                <div class="card-content">
+                    <header class="wrap">
+                        <div class="info">
+                            <div class="info-detail">
+                                <span class="name">통장이름</span>
+                                <button type="button" class="account-number">
+                                    <span>은행이름</span>
+                                    <span>111111111111</span>
+                                    <span class="a" onclick="console.log('복사')">복사</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="quick-opts">
+                            <button type="button" onclick="console.log('버튼 1')">버튼 1</button>
+                            <button type="button" onclick="console.log('버튼 2')">버튼 2</button>
+                        </div>
+                    </header>
+                    <div class="amount">
+                        <span class="value">
+                            <span class="noBacDiv" onclick="console.log('잔액보기')">
+                               잔액보기
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <footer class="card-footer">
+                    <button type="button" onclick="console.log('버튼 3')">버튼 3</button>
+                    <button type="button" onclick="console.log('버튼 4')">버튼 4</button>
+                    <button type="button" onclick="console.log('버튼 5')">버튼 5</button>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
