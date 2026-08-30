@@ -3,7 +3,7 @@ function scrollToField(selector) {
 
     var target = document.querySelector(selector);
     var targetID = target.id || target.dataset.id;
-    var root = target.closest.('.container').parentNode;
+    var root = target.closest('.container').parentNode;
     var rootID = root.id;
     var contents = root.querySelector('.contents');
     var label = document.querySelector('[for="' + targetID + '"]');
